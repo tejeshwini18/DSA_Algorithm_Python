@@ -8,7 +8,6 @@ def rotate(nums,k):
     nums[k:]=nums[k:][::-1]
     return nums
 
-
 nums = [1, 2, 3, 4, 5, 6, 7]
 k = 3
 rotate(nums, k)

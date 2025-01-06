@@ -10,8 +10,6 @@ def remove_duplicates(nums):
             nums[unique_index] = nums[i] 
     return unique_index + 1
     
-    
-
 
 # Test case 1: Empty list
 test1 = []
