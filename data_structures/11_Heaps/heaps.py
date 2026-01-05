@@ -1,20 +1,35 @@
+# A MinHeap is a binary heap where the parent node is always smaller than its child nodes. 
+# This ensures that the smallest element is always at the root (heap[0]). The class uses an array to represent the heap structure.
 class MinHeap:
     def __init__(self):
+        # Creates an empty list self.heap to store the heap elements.
         self.heap = []
 
     def _left_child(self, index):
+        # Purpose: Calculates the index of the left child of a node.
+        # Behavior: For a node at index index, the left child is at index 2 * index + 1
         return 2 * index + 1
 
     def _right_child(self, index):
+        # Purpose: Calculates the index of the right child of a node.
+        # Behavior: For a node at index index, the right child is at index 2 * index + 2.
         return 2 * index + 2
 
     def _parent(self, index):
+        # Purpose: Calculates the index of the parent of a node.
+        # Behavior: For a node at index index, the parent is at index (index - 1) // 2
         return (index - 1) // 2
 
     def _swap(self, index1, index2):
+        # Swaps the elements at two indices in the heap
         self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
 
     def insert(self, value):
+        # Purpose: Inserts a new value into the heap while maintaining the heap property.
+        # Behavior:
+        # Appends the value to the end of the heap.
+        # Compares the new value with its parent, swapping them if the parent is larger.
+        # Repeats this process (called "bubble up") until the heap property is satisfied.
         self.heap.append(value)
         current = len(self.heap) - 1
 
@@ -23,6 +38,11 @@ class MinHeap:
             current = self._parent(current)
 
     def _sink_down(self,index):
+        # Purpose: Restores the heap property after removing the root.
+        # Behavior:
+        # Compares the value at index with its left and right children.
+        # If a child is smaller than the current value, swaps the value with the smallest child.
+        # Repeats this process (called "sink down") until the heap property is restored.
         min_index = index
         while True:
             left_index = self._left_child(min_index)
@@ -41,6 +61,12 @@ class MinHeap:
                 return    
 
     def remove(self):
+        # If the heap is empty, returns None.
+        # If the heap has one element, removes and returns it.
+        # Otherwise:
+        # Removes the root and replaces it with the last element.
+        # Sinks the new root down to restore the heap property.
+        # Returns the original root (smallest value).
         if len(self.heap) == 0:
             return None
 
