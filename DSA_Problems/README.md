@@ -22,8 +22,3 @@ Run any file: `python 01_lru_cache.py` (etc.). All include `if __name__ == "__ma
 | 16 | Course Schedule (Topological Sort) |
 | 17 | Coin Change (DP) |
 | 18 | Task Scheduler with Priorities |
-
-
-## Interview transcripts
-
-- Detailed, interview-ready transcripts for every problem are available in [`interview_transcripts/`](interview_transcripts/README.md).
