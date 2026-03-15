@@ -1,35 +1,15 @@
-# Interview Transcript: Rotate List/Array
+# Rotate List/Array — Human Language Transcript
 
-## Problem in plain English
-**Interviewer:** Explain this question quickly.
+In this problem, the flow starts when we receive the input for **Rotate List/Array**.
 
-**Candidate:** We need to solve **Rotate List/Array**. Best interview approach: Use modulo k and split/reconnect (or reverse trick for arrays).
+First, we set up the core data we need to track the process correctly. In this solution, that means effective rotation size `k % n` and boundary split.
 
-## Clarifying questions
-1. Are numbers/strings unique or can duplicates appear?
-2. Do we return indices, values, count, or boolean?
-3. What to return when no answer exists?
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is we reconnect/slice so last `k` segment moves to front.
 
-## Brute-force baseline
-- Try every pair/subarray/combination directly.
-- Correct but too slow for bigger inputs.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: relative order inside both moved and remaining segments is preserved.
 
-## Optimized approach I would present
-- Pick the right helper structure (hash map/set, pointers, prefix sums).
-- Update it once per element.
-- Return answer as soon as condition is satisfied.
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the rotated sequence/list head.
 
-## Correctness intuition
-The maintained state (seen values / running best / prefix counts) always contains exactly the information needed for the current position, so each step is locally correct and the final result is globally correct.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(n)** and **Space: O(1) or O(n) depending on representation**.
 
-## Complexity
-- **Time:** `O(n)`
-- **Space:** `O(1)`/`O(n)` by representation
-
-## Edge cases
-- Empty input or size 1.
-- All duplicates / all negatives / no valid solution.
-- Large input performance.
-
-## Closing statement
-**Candidate:** I can code this in one pass with clean variable naming and then verify with 3-4 focused tests.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

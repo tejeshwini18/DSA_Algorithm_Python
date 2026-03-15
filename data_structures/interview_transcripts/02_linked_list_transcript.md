@@ -1,31 +1,15 @@
-# Interview Transcript: Linked List
+# Linked List — Human Language Transcript
 
-## Problem framing
-**Interviewer:** What is this structure/problem about?
+In this problem, the flow starts when we receive the input for **Linked List**.
 
-**Candidate:** This topic is **Linked List**. Practical interview idea: Track head/tail pointers and rewire `next`/`prev` links carefully in O(1) pointer updates.
+First, we set up the core data we need to track the process correctly. In this solution, that means node pointers (`head`, optional `tail`, and next/prev links).
 
-## Clarifications before coding
-- Expected operations and their target complexities.
-- Behavior for empty structure / missing keys.
-- Whether ordering, stability, or uniqueness matters.
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is insert/delete is done by rewiring local pointers instead of shifting elements.
 
-## Baseline vs better approach
-**Candidate:** I quickly mention naive simulation, then switch to the data-structure-aware method that avoids repeated full scans.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: list connectivity is preserved after every pointer update.
 
-## Strong interview explanation
-- Define the invariant (ordering/frequency/parent-child relation/etc.).
-- Show how each operation preserves the invariant.
-- Mention one tricky edge case and how code handles it.
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the updated list structure and traversal output.
 
-## Complexity
-- **Time:** Traversal/search `O(n)`, head/tail inserts `O(1)` with pointers.
-- **Space:** `O(1)` extra (excluding nodes).
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(1) local insert/delete with pointer known, O(n) search** and **Space: O(1) extra**.
 
-## Common follow-ups
-- Can you support this in streaming mode?
-- What breaks in worst-case input?
-- How would you test inserts, deletes, and boundary cases?
-
-## Final pitch
-**Candidate:** I would implement the operations with invariant-first reasoning, then prove correctness operation-by-operation.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

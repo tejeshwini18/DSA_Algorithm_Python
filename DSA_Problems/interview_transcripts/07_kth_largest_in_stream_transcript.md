@@ -1,49 +1,15 @@
-# Interview Transcript: Kth Largest in a Stream
+# Kth Largest in a Stream — Human Language Transcript
 
-## 1) Problem in plain English
-**Interviewer:** Explain the problem quickly.
+In this problem, the flow starts when we receive the input for **Kth Largest in a Stream**.
 
-**Candidate:** We need to solve **Kth Largest in a Stream**. The clean approach is: Keep min-heap of size `k`. Insert each value, and if heap exceeds `k`, pop smallest. Heap top stays kth largest.
+First, we set up the core data we need to track the process correctly. In this solution, that means a min-heap that stores only k largest seen values.
 
-## 2) Clarifying questions I would ask first
-**Candidate:** Before I code, I would confirm:
-- Exact input format and constraints.
-- Expected behavior for empty input or impossible cases.
-- Whether we optimize for latency per operation or total batch runtime.
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is every new value is pushed; if heap size > k, smallest is removed.
 
-## 3) Brute-force I would mention (briefly)
-**Candidate:** A straightforward baseline is to simulate all options or repeatedly scan/recompute.
-That makes correctness easy to reason about, but it is usually too slow for interview constraints.
-I mention it quickly, then move to the optimal design.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: heap always contains exactly the k largest elements seen so far.
 
-## 4) Optimal approach (what I would say while whiteboarding)
-**Candidate:**
-- I choose data structures that preserve the key invariant after every step.
-- Each update/query touches only what is necessary.
-- This avoids repeated full rescans and gives predictable complexity.
-- I also keep edge-case handling explicit (empty input, ties, impossible result).
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the heap root, which is the kth largest.
 
-## 5) Why this works (short correctness argument)
-**Candidate:** The algorithm is correct because every operation maintains the same invariant the answer depends on.
-If the invariant holds before a step and my update preserves it, it holds for all steps.
-So the final output is valid.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(log k) per add** and **Space: O(k)**.
 
-## 6) Complexity (say this confidently)
-- **Time:** `add`: `O(log k)`, init: `O(n log k)`.
-- **Space:** `O(k)`.
-
-## 7) Edge cases I would call out
-- Empty/minimal input.
-- Duplicate values / tie-breaking.
-- No valid answer path (return sentinel value).
-- Very large input where brute force would timeout.
-
-## 8) Follow-up extensions interviewers ask
-- Can we reduce memory further?
-- Can we return reconstruction/path, not just boolean/count?
-- Can this work in streaming/online settings?
-- How would we unit-test quickly?
-
-## 9) 30-second closing summary
-**Candidate:** I start from a simple baseline, then optimize with the right data structure and invariant.
-This gives clean correctness reasoning, handles edge cases, and meets interview-level performance targets.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

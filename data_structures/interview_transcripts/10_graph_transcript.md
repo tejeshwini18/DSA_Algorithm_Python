@@ -1,31 +1,15 @@
-# Interview Transcript: Graph
+# Graph — Human Language Transcript
 
-## Problem framing
-**Interviewer:** What is this structure/problem about?
+In this problem, the flow starts when we receive the input for **Graph**.
 
-**Candidate:** This topic is **Graph**. Practical interview idea: Model relationships with adjacency lists and solve reachability/ordering with BFS/DFS.
+First, we set up the core data we need to track the process correctly. In this solution, that means an adjacency list plus traversal state.
 
-## Clarifications before coding
-- Expected operations and their target complexities.
-- Behavior for empty structure / missing keys.
-- Whether ordering, stability, or uniqueness matters.
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is we iterate neighbors through BFS/DFS depending on task.
 
-## Baseline vs better approach
-**Candidate:** I quickly mention naive simulation, then switch to the data-structure-aware method that avoids repeated full scans.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: visited set prevents duplicate processing and preserves traversal correctness.
 
-## Strong interview explanation
-- Define the invariant (ordering/frequency/parent-child relation/etc.).
-- Show how each operation preserves the invariant.
-- Mention one tricky edge case and how code handles it.
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from reachability/order/path-related result from full traversal.
 
-## Complexity
-- **Time:** BFS/DFS `O(V+E)`.
-- **Space:** `O(V+E)` adjacency + visited.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(V + E)** and **Space: O(V + E)**.
 
-## Common follow-ups
-- Can you support this in streaming mode?
-- What breaks in worst-case input?
-- How would you test inserts, deletes, and boundary cases?
-
-## Final pitch
-**Candidate:** I would implement the operations with invariant-first reasoning, then prove correctness operation-by-operation.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

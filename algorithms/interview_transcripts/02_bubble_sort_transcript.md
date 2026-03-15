@@ -1,46 +1,15 @@
-# Interview Transcript: Bubble Sort
+# Bubble Sort — Human Language Transcript
 
-## Problem in simple words
-**Interviewer:** Explain what this question is testing.
+In this problem, the flow starts when we receive the input for **Bubble Sort**.
 
-**Candidate:** This problem is about **Bubble Sort**. Core idea: Repeatedly swap adjacent out-of-order pairs so the largest unsorted value bubbles to the end each pass.
+First, we set up the core data we need to track the process correctly. In this solution, that means nested passes over adjacent pairs and a swap flag.
 
-## Clarifying points I would ask
-1. Are there input size limits that force better than `O(n^2)`?
-2. Is input always valid (sorted array, connected graph, etc.)?
-3. Do we need in-place output, stable order, or just correctness?
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is in each pass, adjacent out-of-order elements are swapped so largest unsorted value moves right.
 
-## Brute-force baseline
-**Candidate:** I first mention the naive way (linear scan / repeated swapping / full traversal), then explain why it is too slow for bigger input.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: after pass `p`, last `p` elements are in final sorted position.
 
-## Optimal interview approach (spoken)
-**Candidate:**
-- I keep one invariant throughout execution.
-- Each iteration updates only the minimal state needed.
-- I stop as soon as answer is guaranteed.
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the fully sorted array after no swaps / all passes.
 
-For this topic, the invariant is tied directly to `Bubble Sort` and that is why correctness is easy to justify.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(n^2) worst, O(n) best with early exit** and **Space: O(1)**.
 
-## Walkthrough (how I narrate)
-- Start with a tiny input.
-- Show initial state variables.
-- Describe one full iteration/recursive level.
-- Repeat until termination and confirm final answer.
-
-## Complexity to state confidently
-- **Time:** `O(n^2)` average/worst, `O(n)` best with early-exit flag.
-- **Space:** `O(1)` in-place.
-
-## Common edge cases
-- Empty or one-element input.
-- Duplicate values or ties.
-- Already sorted / reverse sorted patterns.
-- Impossible target case (where applicable).
-
-## Follow-up prompts
-- Can we make it iterative/recursive alternative?
-- Can we reduce auxiliary memory?
-- How would we test worst-case behavior quickly?
-
-## Closing line
-**Candidate:** I would code this with clear variable names, prove the invariant in 2-3 lines, and validate with edge-case tests.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

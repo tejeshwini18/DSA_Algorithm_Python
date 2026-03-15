@@ -1,49 +1,15 @@
-# Interview Transcript: LFU Cache
+# LFU Cache — Human Language Transcript
 
-## 1) Problem in plain English
-**Interviewer:** Explain the problem quickly.
+In this problem, the flow starts when we receive the input for **LFU Cache**.
 
-**Candidate:** We need to solve **LFU Cache**. The clean approach is: Use key->node map plus frequency->doubly linked list map. Keep `min_freq` so eviction is immediate from the least-frequency list tail/head depending on recency convention.
+First, we set up the core data we need to track the process correctly. In this solution, that means a key->node map, frequency->doubly linked list buckets, and `min_freq`.
 
-## 2) Clarifying questions I would ask first
-**Candidate:** Before I code, I would confirm:
-- Exact input format and constraints.
-- Expected behavior for empty input or impossible cases.
-- Whether we optimize for latency per operation or total batch runtime.
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is every access increases a node frequency and moves it to the next bucket; eviction happens from the lowest-frequency bucket.
 
-## 3) Brute-force I would mention (briefly)
-**Candidate:** A straightforward baseline is to simulate all options or repeatedly scan/recompute.
-That makes correctness easy to reason about, but it is usually too slow for interview constraints.
-I mention it quickly, then move to the optimal design.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: items are grouped by exact frequency, and tie-breaking follows recency inside each frequency bucket.
 
-## 4) Optimal approach (what I would say while whiteboarding)
-**Candidate:**
-- I choose data structures that preserve the key invariant after every step.
-- Each update/query touches only what is necessary.
-- This avoids repeated full rescans and gives predictable complexity.
-- I also keep edge-case handling explicit (empty input, ties, impossible result).
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the updated node value for queries, and the proper victim node during eviction.
 
-## 5) Why this works (short correctness argument)
-**Candidate:** The algorithm is correct because every operation maintains the same invariant the answer depends on.
-If the invariant holds before a step and my update preserves it, it holds for all steps.
-So the final output is valid.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(1) amortized per operation** and **Space: O(capacity)**.
 
-## 6) Complexity (say this confidently)
-- **Time:** `get`: `O(1)`, `put`: `O(1)` amortized.
-- **Space:** `O(capacity)`.
-
-## 7) Edge cases I would call out
-- Empty/minimal input.
-- Duplicate values / tie-breaking.
-- No valid answer path (return sentinel value).
-- Very large input where brute force would timeout.
-
-## 8) Follow-up extensions interviewers ask
-- Can we reduce memory further?
-- Can we return reconstruction/path, not just boolean/count?
-- Can this work in streaming/online settings?
-- How would we unit-test quickly?
-
-## 9) 30-second closing summary
-**Candidate:** I start from a simple baseline, then optimize with the right data structure and invariant.
-This gives clean correctness reasoning, handles edge cases, and meets interview-level performance targets.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.

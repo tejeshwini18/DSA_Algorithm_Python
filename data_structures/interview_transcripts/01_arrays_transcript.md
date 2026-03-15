@@ -1,31 +1,15 @@
-# Interview Transcript: Arrays
+# Arrays — Human Language Transcript
 
-## Problem framing
-**Interviewer:** What is this structure/problem about?
+In this problem, the flow starts when we receive the input for **Arrays**.
 
-**Candidate:** This topic is **Arrays**. Practical interview idea: Use index-based access and linear scans/two-pointer strategies depending on the query.
+First, we set up the core data we need to track the process correctly. In this solution, that means contiguous index-based storage and loop pointers.
 
-## Clarifications before coding
-- Expected operations and their target complexities.
-- Behavior for empty structure / missing keys.
-- Whether ordering, stability, or uniqueness matters.
+Next, we process the input step by step, and after each step we update our state so the algorithm stays correct. The key transition here is we use direct indexing and controlled scans for query/update operations.
 
-## Baseline vs better approach
-**Candidate:** I quickly mention naive simulation, then switch to the data-structure-aware method that avoids repeated full scans.
+As the loop or recursion continues, the algorithm keeps preserving one important invariant: each index access is deterministic and order is preserved.
 
-## Strong interview explanation
-- Define the invariant (ordering/frequency/parent-child relation/etc.).
-- Show how each operation preserves the invariant.
-- Mention one tricky edge case and how code handles it.
+When the traversal/processing ends, we read the final value from the maintained state and return the required answer. In this implementation, the result comes from the computed value(s) after one or more linear passes.
 
-## Complexity
-- **Time:** Usually `O(1)` access, `O(n)` scan/update shifts.
-- **Space:** `O(1)` extra for in-place patterns.
+This gives us an efficient solution because we avoid recomputing work from scratch on every step. The complexity is **Time: O(1) index access, O(n) scan/update shifts** and **Space: O(1) extra for in-place operations**.
 
-## Common follow-ups
-- Can you support this in streaming mode?
-- What breaks in worst-case input?
-- How would you test inserts, deletes, and boundary cases?
-
-## Final pitch
-**Candidate:** I would implement the operations with invariant-first reasoning, then prove correctness operation-by-operation.
+So in interview language, the full story is: initialize the right structure, update it consistently for each element/operation, preserve the invariant, and extract the answer from the final maintained state.
